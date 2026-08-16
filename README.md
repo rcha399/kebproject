@@ -31,3 +31,14 @@ Once Ethan/Jidam's backend is up:
 3. If the backend pushes updates instead of being polled, set `LIVE_SOCKET` and it'll pick up `{id, status, updatedAt}` messages.
 
 Seat count is driven entirely by the `SEATS` array in `data.js` — add/remove seats there, no HTML changes needed.
+
+## Mobile app (PWA)
+
+The site is a Progressive Web App — no separate app codebase needed. `manifest.json` + `service-worker.js` + `pwa.js` make it installable on a phone:
+
+- **iPhone (Safari):** open the site → Share → "Add to Home Screen"
+- **Android (Chrome):** open the site → menu → "Install app" (or a banner offers this automatically)
+
+Once installed it opens full-screen from the home screen icon, and the service worker caches the app shell so it still opens (showing the last-synced data) without a connection.
+
+**Note:** service workers require HTTPS (or `localhost`) — `file://` won't register one. Serve the folder locally (`python3 -m http.server`) or deploy it (e.g. GitHub Pages) to test the install prompt.
