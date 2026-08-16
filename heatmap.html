@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seat Signal — Busyness</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <div class="brand"><span class="brand-dot"></span>Seat Signal</div>
+    <nav class="nav">
+      <a href="index.html">Seats</a>
+      <a href="heatmap.html" class="active">Busyness</a>
+    </nav>
+  </div>
+
+  <div class="section-head" style="margin-top:0;">
+    <h2>Busyness by zone</h2>
+  </div>
+  <p style="color:var(--steel); font-size:14px; max-width:56ch; margin-top:-6px;">
+    A wider view across study spaces, so you can pick where to head before you're already there. Bar fill is share of tracked seats occupied.
+  </p>
+
+  <div class="zone-grid" id="zone-grid" style="margin-top:22px;"></div>
+
+  <div class="foot">
+    <span>Zones update as seat data comes in</span>
+    <span id="last-sync">—</span>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="heatmap.js"></script>
+</body>
+</html>

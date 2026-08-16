@@ -1,0 +1,384 @@
+/* ===========================================================
+   Seat Signal — design tokens
+   Palette:
+     --ink:        #10151b   (background, control-room dark)
+     --panel:      #1a2129   (card surfaces)
+     --panel-line: #2a3540   (hairlines / dividers)
+     --steel:      #7b8a99   (secondary text, chrome)
+     --paper:      #e7edf2   (primary text)
+     --go:         #46d17a   (free)
+     --wait:       #f5b84e   (finishing / grace period)
+     --stop:       #f2564b   (taken)
+     --void:       #45505c   (n/a seat)
+   Type:
+     display / utility: 'Space Grotesk' (headings, seat IDs, big numbers)
+     body:  'Inter' (copy, labels)
+     data:  'IBM Plex Mono' (timestamps, counters, coordinates)
+   =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink: #10151b;
+  --panel: #1a2129;
+  --panel-line: #2a3540;
+  --steel: #7b8a99;
+  --paper: #e7edf2;
+  --go: #46d17a;
+  --wait: #f5b84e;
+  --stop: #f2564b;
+  --void: #45505c;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-data: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(70, 209, 122, 0.05), transparent 45%),
+    radial-gradient(circle at 85% 100%, rgba(242, 86, 75, 0.05), transparent 45%);
+}
+
+a { color: inherit; }
+
+/* ---------- layout shell ---------- */
+
+.shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--go);
+  box-shadow: 0 0 10px var(--go);
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.nav a {
+  font-family: var(--font-data);
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--steel);
+  padding: 7px 14px;
+  border-radius: 7px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav a:hover { color: var(--paper); }
+.nav a.active { background: #232c35; color: var(--paper); }
+
+/* ---------- signal panel (traffic light hero) ---------- */
+
+.signal-panel {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 28px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+}
+
+.signal-housing {
+  width: 88px;
+  background: #0c1116;
+  border-radius: 14px;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--panel-line);
+  justify-self: center;
+}
+
+.lamp {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1c242c;
+  opacity: 0.28;
+  transition: opacity 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.lamp.stop.lit { background: var(--stop); opacity: 1; box-shadow: 0 0 24px rgba(242, 86, 75, 0.65); }
+.lamp.wait.lit { background: var(--wait); opacity: 1; box-shadow: 0 0 24px rgba(245, 184, 78, 0.65); }
+.lamp.go.lit   { background: var(--go);   opacity: 1; box-shadow: 0 0 24px rgba(70, 209, 122, 0.65); }
+
+.signal-copy .eyebrow {
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin: 0 0 6px;
+}
+
+.signal-copy h1 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.signal-copy p {
+  margin: 0;
+  color: var(--steel);
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 46ch;
+}
+
+.signal-stats {
+  display: flex;
+  gap: 22px;
+  margin-top: 16px;
+}
+
+.stat {
+  font-family: var(--font-data);
+}
+
+.stat .n {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.stat .l {
+  font-size: 11px;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stat.go .n { color: var(--go); }
+.stat.wait .n { color: var(--wait); }
+.stat.stop .n { color: var(--stop); }
+
+/* ---------- section headers ---------- */
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 36px 0 14px;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--steel);
+  margin: 0;
+  font-weight: 600;
+}
+
+.legend {
+  display: flex;
+  gap: 14px;
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--steel);
+}
+
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.swatch.go { background: var(--go); }
+.swatch.wait { background: var(--wait); }
+.swatch.stop { background: var(--stop); }
+.swatch.na { background: var(--void); }
+
+/* ---------- seat grid (parking-lot style) ---------- */
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.seat {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  overflow: hidden;
+}
+
+.seat:hover { transform: translateY(-2px); border-color: #3a4753; }
+
+.seat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--void);
+}
+
+.seat[data-status="free"]::before { background: var(--go); }
+.seat[data-status="taken"]::before { background: var(--stop); }
+.seat[data-status="finishing"]::before { background: var(--wait); }
+.seat[data-status="na"]::before { background: var(--void); }
+
+.seat-id {
+  font-family: var(--font-data);
+  font-size: 12px;
+  color: var(--steel);
+  margin-bottom: 18px;
+}
+
+.seat-icon { margin-bottom: 14px; }
+.seat-icon svg { width: 30px; height: 30px; display: block; }
+
+.seat[data-status="free"] .seat-icon svg { color: var(--go); }
+.seat[data-status="taken"] .seat-icon svg { color: var(--stop); }
+.seat[data-status="finishing"] .seat-icon svg { color: var(--wait); }
+.seat[data-status="na"] .seat-icon svg { color: var(--void); }
+
+.seat-status {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.seat-meta {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--steel);
+  margin-top: 4px;
+}
+
+/* ---------- heatmap page ---------- */
+
+.zone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.zone {
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.zone-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+
+.zone-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.zone-pct {
+  font-family: var(--font-data);
+  font-size: 13px;
+  color: var(--steel);
+}
+
+.zone-bar {
+  height: 6px;
+  background: #0c1116;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.zone-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.zone-caption {
+  margin-top: 10px;
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--steel);
+}
+
+/* ---------- footer ---------- */
+
+.foot {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--panel-line);
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--steel);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 560px) {
+  .signal-panel { grid-template-columns: 1fr; }
+  .signal-housing { justify-self: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
