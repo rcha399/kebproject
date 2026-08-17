@@ -29,8 +29,8 @@ const SEATS = [
 const ZONES = [
   { id: "kate", name: "Kate Edger" },
   { id: "gsl", name: "General Library" },
-  { id: "eng", name: "Engineering Library" },
-  { id: "law", name: "Law Library" },
+  { id: "eng", name: "Engineering" },
+  { id: "law", name: "OGGB" },
 ];
 
 const ICONS = {
