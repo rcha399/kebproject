@@ -21,12 +21,15 @@ function render(state) {
 
   [lampGo, lampWait, lampStop].forEach((l) => l.classList.remove("lit"));
 
-  if (free >= 2) {
+  const total = state.seats.length;
+
+  if (free >= 1 && free === total) {
+    // every seat free
     lampGo.classList.add("lit");
     headline.textContent = "Seats are open";
-  } else if (free === 1 || finishing >= 1) {
+  } else if (free >= 1 || finishing >= 1) {
     lampWait.classList.add("lit");
-    headline.textContent = "Almost full — one may open soon";
+    headline.textContent = total === 1 ? "Taken, but may open soon" : "Almost full — one may open soon";
   } else {
     lampStop.classList.add("lit");
     headline.textContent = "Full right now";
