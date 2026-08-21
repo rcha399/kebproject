@@ -314,10 +314,20 @@ a { color: inherit; }
 }
 
 .zone {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: var(--panel);
   border: 1px solid var(--panel-line);
   border-radius: 14px;
   padding: 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.zone:hover {
+  transform: translateY(-2px);
+  border-color: #3a4753;
 }
 
 .zone-top {

@@ -18,14 +18,14 @@ function renderZones(state) {
       const pct = Math.round(z.pct);
       const color = colorForPct(pct);
       return `
-      <div class="zone">
+      <a class="zone" href="zone.html?id=${z.id}">
         <div class="zone-top">
           <div class="zone-name">${z.name}</div>
           <div class="zone-pct">${pct}%</div>
         </div>
         <div class="zone-bar"><div class="zone-bar-fill" style="width:${pct}%; background:${color};"></div></div>
-        <div class="zone-caption">${pct < 40 ? "Plenty of seats" : pct < 75 ? "Filling up" : "Nearly full"}</div>
-      </div>`;
+        <div class="zone-caption">${pct < 40 ? "Plenty of seats" : pct < 75 ? "Filling up" : "Nearly full"} · ${z.seatCount} seats</div>
+      </a>`;
     })
     .join("");
 

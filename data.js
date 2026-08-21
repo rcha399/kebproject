@@ -26,11 +26,12 @@ const SEATS = [
 ];
 
 // Library zones for the heatmap/busyness view.
+// seatCount drives how many seats the zone-detail page simulates when clicked into.
 const ZONES = [
-  { id: "kate", name: "Kate Edger" },
-  { id: "gsl", name: "General Library" },
-  { id: "eng", name: "Engineering" },
-  { id: "law", name: "OGGB" },
+  { id: "kate", name: "Kate Edgar Level 4", seatCount: 150 },
+  { id: "gsl", name: "General Library", seatCount: 200 },
+  { id: "eng", name: "Engineering", seatCount: 120 },
+  { id: "law", name: "OGGB", seatCount: 180 },
 ];
 
 const ICONS = {
@@ -98,4 +99,30 @@ function startFeed() {
     setInterval(fetchLiveSeats, 5000); // fallback polling
     try { openLiveSocket(); } catch (e) { /* socket optional */ }
   }
+}
+
+// ---------- zone-detail seat simulation ----------
+// The 4 physical demo seats above are the real hardware. A full zone
+// (e.g. 150 seats on Kate Edgar Level 4) isn't wired up seat-by-seat —
+// this generates a plausible-looking seat map for that many seats so
+// the zone-detail page can show the same traffic light + grid pattern
+// at scale. Swap this out for real per-seat data if the zone ever gets
+// fully instrumented.
+
+function generateZoneSeats(zone) {
+  const statuses = ["free", "taken", "taken", "finishing", "free", "taken"];
+  const seats = [];
+  for (let i = 1; i <= zone.seatCount; i++) {
+    seats.push({
+      id: `${zone.id.toUpperCase()}-${i}`,
+      name: `Seat ${i}`,
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      updatedAt: Date.now() - Math.floor(Math.random() * 120000),
+    });
+  }
+  return seats;
+}
+
+function getZoneById(id) {
+  return ZONES.find((z) => z.id === id);
 }

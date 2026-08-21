@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seat Signal — Zone</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="assets/icon-192.png" />
+<link rel="apple-touch-icon" href="assets/icon-192.png" />
+<meta name="theme-color" content="#10151b" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Seat Signal" />
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <div class="brand"><span class="brand-dot"></span>Seat Signal</div>
+    <nav class="nav">
+      <a href="index.html">Seats</a>
+      <a href="heatmap.html">Busyness</a>
+    </nav>
+  </div>
+
+  <p><a href="heatmap.html" style="color:var(--steel); font-family:var(--font-data); font-size:12px; text-decoration:none;">&larr; Back to busyness</a></p>
+
+  <section class="signal-panel" style="margin-top:14px;">
+    <div class="signal-housing">
+      <div class="lamp stop" id="lamp-stop"></div>
+      <div class="lamp wait" id="lamp-wait"></div>
+      <div class="lamp go" id="lamp-go"></div>
+    </div>
+    <div class="signal-copy">
+      <p class="eyebrow">At the entrance</p>
+      <h1 id="headline">Checking seats&hellip;</h1>
+      <p id="zone-desc">Loading zone&hellip;</p>
+      <div class="signal-stats">
+        <div class="stat go"><div class="n" id="count-free">–</div><div class="l">Free</div></div>
+        <div class="stat wait"><div class="n" id="count-finishing">–</div><div class="l">Wrapping up</div></div>
+        <div class="stat stop"><div class="n" id="count-taken">–</div><div class="l">Taken</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Seat map</h2>
+    <div class="legend">
+      <span><i class="swatch go"></i>Free</span>
+      <span><i class="swatch wait"></i>Wrapping up</span>
+      <span><i class="swatch stop"></i>Taken</span>
+      <span><i class="swatch na"></i>N/A</span>
+    </div>
+  </div>
+
+  <div class="seat-grid" id="seat-grid"></div>
+
+  <div class="foot">
+    <span>Simulated seat map — not live hardware data</span>
+    <span id="last-sync">—</span>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="zone.js"></script>
+<script src="pwa.js"></script>
+</body>
+</html>

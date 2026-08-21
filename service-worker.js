@@ -3,10 +3,12 @@ const CACHE = "seat-signal-v1";
 const ASSETS = [
   "./index.html",
   "./heatmap.html",
+  "./zone.html",
   "./style.css",
   "./data.js",
   "./app.js",
   "./heatmap.js",
+  "./zone.js",
   "./manifest.json",
   "./assets/icon-192.png",
   "./assets/icon-512.png",
