@@ -16,10 +16,13 @@ const SOURCE_MODE = "mock"; // "mock" | "live"
 const LIVE_ENDPOINT = "/api/seats";      // GET -> [{id,name,status,updatedAt}]
 const LIVE_SOCKET   = "ws://localhost:8080/seats"; // optional, if backend pushes updates
 
-// Seat catalogue — 1 button = 1 seat for this demo.
+// Seat catalogue — 1 button = 1 seat, 4 seats for this demo.
 // Add more entries here (or fetch them from the backend) to scale up later.
 const SEATS = [
   { id: "A1", name: "Seat A1" },
+  { id: "A2", name: "Seat A2" },
+  { id: "B1", name: "Seat B1" },
+  { id: "B2", name: "Seat B2" },
 ];
 
 // Library zones for the heatmap/busyness view.

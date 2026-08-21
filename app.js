@@ -22,9 +22,9 @@ function render(state) {
   [lampGo, lampWait, lampStop].forEach((l) => l.classList.remove("lit"));
 
   const total = state.seats.length;
+  const goThreshold = Math.max(1, Math.ceil(total / 2));
 
-  if (free >= 1 && free === total) {
-    // every seat free
+  if (free >= goThreshold) {
     lampGo.classList.add("lit");
     headline.textContent = "Seats are open";
   } else if (free >= 1 || finishing >= 1) {
