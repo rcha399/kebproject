@@ -20,9 +20,6 @@ const LIVE_SOCKET   = "ws://localhost:8080/seats"; // optional, if backend pushe
 // Add more entries here (or fetch them from the backend) to scale up later.
 const SEATS = [
   { id: "A1", name: "Seat A1" },
-  { id: "A2", name: "Seat A2" },
-  { id: "B1", name: "Seat B1" },
-  { id: "B2", name: "Seat B2" },
 ];
 
 // Library zones for the heatmap/busyness view.
