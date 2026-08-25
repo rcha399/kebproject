@@ -24,7 +24,7 @@
 // ESP32 broadcasts its own network - no dependency on venue WiFi.
 // Connect your phone/laptop to this SSID, then browse to the IP
 // printed on Serial (default AP IP is 192.168.4.1).
-const char* AP_SSID = "KEB-SeatSense-Demo";
+const char* AP_SSID = "KEB-SeatSignal-Demo";
 const char* AP_PASSWORD = "projectplaygroundt4"; // must be 8+ characters, or "" for an open network
 
 // ---------- Pin map ----------
