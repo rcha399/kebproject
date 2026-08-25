@@ -12,7 +12,7 @@
    backend actually exposes.
    =========================================================== */
 
-const SOURCE_MODE = "mock"; // "mock" | "live"
+const SOURCE_MODE = "live"; // "mock" | "live"
 const LIVE_ENDPOINT = "/api/seats";      // GET -> [{id,name,status,updatedAt}]
 const LIVE_SOCKET   = "ws://localhost:8080/seats"; // optional, if backend pushes updates
 
