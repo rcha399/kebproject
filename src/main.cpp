@@ -24,8 +24,8 @@
 // ESP32 broadcasts its own network - no dependency on venue WiFi.
 // Connect your phone/laptop to this SSID, then browse to the IP
 // printed on Serial (default AP IP is 192.168.4.1).
-const char* AP_SSID = "SeatSense-Demo";
-const char* AP_PASSWORD = "seatsense123"; // must be 8+ characters, or "" for an open network
+const char* AP_SSID = "KEB-SeatSense-Demo";
+const char* AP_PASSWORD = "projectplaygroundt4"; // must be 8+ characters, or "" for an open network
 
 // ---------- Pin map ----------
 #define TRIG_PIN 18
@@ -45,7 +45,7 @@ const float OCCUPIED_THRESHOLD_CM = 80.0;         // closer than this = somethin
 const unsigned long PRESENCE_DEBOUNCE_MS = 1500;  // sensor reading must be stable this long
 const unsigned long FINISHING_TIMEOUT_MS = 15000; // yellow -> green after 15s
 const unsigned long BUTTON_DEBOUNCE_MS = 50;
-const unsigned long BUTTON_COOLDOWN_MS = 10000; // ignore further presses for 10s after one is accepted
+const unsigned long BUTTON_COOLDOWN_MS = 5000; // ignore further presses for 5s after one is accepted
 
 // ---------- Seat identity (must match data.js SEATS[0].id) ----------
 const char* SEAT_ID = "A1";
@@ -60,6 +60,7 @@ bool lastPresenceReading = false;
 bool stablePresence = false;
 
 unsigned long finishingStartTime = 0;
+bool finishingWasManual = false; // true if entered FINISHING via button override
 
 bool lastButtonReading = HIGH;
 unsigned long lastButtonDebounceTime = 0;
@@ -184,17 +185,27 @@ void runStateMachine(bool pressed) {
       break;
 
     case TAKEN:
-      if (!stablePresence) {
+      if (pressed) {
+        // manual override: seat owner flags they're leaving, regardless of sensor
         changeState(FINISHING);
         finishingStartTime = millis();
+        finishingWasManual = true;
+      } else if (!stablePresence) {
+        changeState(FINISHING);
+        finishingStartTime = millis();
+        finishingWasManual = false;
       }
-      // while stablePresence is true, stays TAKEN (red) - no action needed
       break;
 
     case FINISHING:
-      if (stablePresence) {
-        changeState(TAKEN); // someone's back - cancel the finishing countdown
-      } else if (pressed || (millis() - finishingStartTime > FINISHING_TIMEOUT_MS)) {
+      if (pressed) {
+        // manual override: confirmed leaving, skip straight to free
+        changeState(FREE);
+      } else if (!finishingWasManual && stablePresence) {
+        // only auto-cancel back to TAKEN if this was an automatic (sensor-triggered)
+        // entry - a manual override expects the sensor to keep seeing them
+        changeState(TAKEN);
+      } else if (millis() - finishingStartTime > FINISHING_TIMEOUT_MS) {
         changeState(FREE);
       }
       break;
