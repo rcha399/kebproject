@@ -41,7 +41,7 @@ const char* AP_PASSWORD = "projectplaygroundt4"; // must be 8+ characters, or ""
 #define COMMON_ANODE false
 
 // ---------- Tuning ----------
-const float OCCUPIED_THRESHOLD_CM = 30.0;         // closer than this = something detected
+const float OCCUPIED_THRESHOLD_CM = 50.0;         // closer than this = something detected
 const unsigned long PRESENCE_DEBOUNCE_MS = 1500;  // sensor reading must be stable this long
 const unsigned long FINISHING_TIMEOUT_MS = 10000; // yellow -> green after ms
 const unsigned long BUTTON_DEBOUNCE_MS = 50;
